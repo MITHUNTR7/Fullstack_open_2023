@@ -7,22 +7,41 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-
+  
+  const handleGoodClick = () => setGood(good + 1)
+  const handleNeutralClick = () => setNeutral(neutral + 1)
+  const handleBadClick = () => setBad(bad + 1)
 
   return (
     <div>
       <h1>give feedback</h1>
 
-
-      <button onClick={() => setGood(good + 1)}>good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>nuetral</button>
-      <button onClick={() => setBad(bad + 1)}>bad</button>
+      <Button name="good" handler={handleGoodClick}/>
+      <Button name="neutral" handler={handleNeutralClick}/>
+      <Button name="bad" handler={handleBadClick}/>
+     
 
       <Statistics good={good} neutral={neutral} bad={bad} />
 
     </div>
   )
 }
+
+const StatisticLine = ({text, value}) => {
+
+  return(
+    <p> { text } { value } </p>
+  )
+}
+const Button = ({name, handler})=>{
+  
+  return(
+    <button onClick={handler}>{name}</button>
+  )
+  
+  
+}
+
 
 const Statistics = ({ good, neutral, bad }) => {
 
@@ -34,7 +53,11 @@ const Statistics = ({ good, neutral, bad }) => {
     const total = good + neutral + bad
     return `${good * 100 / total}%`
   }
+  
+  
   const total = good + neutral + bad
+  
+  
   if (!total) {
     return (
       <div>
@@ -44,23 +67,22 @@ const Statistics = ({ good, neutral, bad }) => {
       </div>
     )
   }
-
   return (
     <>
       <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {good + neutral + bad}</p>
-      <p>average {good + neutral + bad && average(good, neutral, bad)}</p>
-      <p>positive {(good + neutral + bad) && positive(good, neutral, bad)}</p>
+
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      
+      <StatisticLine text="all" value={good + neutral + bad} />
+      
+      <StatisticLine text="average" value={average(good, neutral, bad)} />
+      <StatisticLine text="positive" value={positive(good, neutral, bad)} />
+
     </>
 
-
-
   )
-
-
 }
 
 
