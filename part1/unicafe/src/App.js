@@ -34,6 +34,16 @@ const Statistics = ({ good, neutral, bad }) => {
     const total = good + neutral + bad
     return `${good * 100 / total}%`
   }
+  const total = good + neutral + bad
+  if (!total) {
+    return (
+      <div>
+        <h1>statistics</h1>
+        No feedbacks given
+
+      </div>
+    )
+  }
 
   return (
     <>
