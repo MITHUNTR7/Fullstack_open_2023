@@ -20,7 +20,7 @@ const App = () => {
     setSelected(random)
   }
 
-
+  
   const handleVotes = () => {
 
     const copy = [...votes]
